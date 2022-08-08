@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+
+  bot:
+    build:
+      context: .
+      dockerfile: src/Dockerfile
+    depends_on:
+      - cache
+
+
+
