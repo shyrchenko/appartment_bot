@@ -5,7 +5,7 @@ import logging
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
-from parsers import parse_olx
+from parsers import parse_url
 from jobs import update_offers
 
 scheduler = BackgroundScheduler()
@@ -26,7 +26,7 @@ bot = telebot.TeleBot(API_TOKEN)
 def send_welcome(message):
     user_id: str = message.from_user.id
     chat_id: str = message.chat.id
-    parsed_urls = parse_olx()
+    parsed_urls = parse_url()
 
     bot.reply_to(message, 'I will help you with finding new apartments')
     sended_urls = set()

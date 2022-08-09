@@ -1,4 +1,4 @@
-from parsers import parse_olx
+from parsers import parse_url
 from redis import Redis
 import pickle
 from typing import Set
@@ -8,7 +8,7 @@ import logging
 
 def update_offers(bot: telebot.TeleBot, redis_instance: Redis, user_id: str, chat_id: str):
     logging.info('Starting of updating...')
-    parsed_urls = parse_olx()
+    parsed_urls = parse_url()
     serialized_sended_urls = redis_instance.hget(user_id, 'sended_urls')
     if serialized_sended_urls is None:
         raise ValueError(f'Don\'t have any sended offer for user {user_id}')
