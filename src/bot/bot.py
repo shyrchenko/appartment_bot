@@ -1,5 +1,4 @@
 import telebot
-from redis import Redis
 import pickle
 import logging
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -16,8 +15,6 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)\
 
 logging.getLogger('apscheduler').setLevel(logging.DEBUG)
-
-redis_instance = Redis('cache')
 
 API_TOKEN = '1101957006:AAHfjfmZWxYT-Fk5l1pOLR1PadBInI_oDOI'
 bot = telebot.TeleBot(API_TOKEN)
