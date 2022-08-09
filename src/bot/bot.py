@@ -10,12 +10,9 @@ from jobs import update_offers
 
 scheduler = BackgroundScheduler()
 
-logging.basicConfig()
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(name)s:%(message)s\n')
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.handlers[0].setFormatter(logging.Formatter(
-    '%(asctime)s:%(levelname)s:%(name)s:%(message)s\n'
-))
+logger.setLevel(logging.DEBUG)\
 
 logging.getLogger('apscheduler').setLevel(logging.DEBUG)
 
