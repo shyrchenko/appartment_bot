@@ -6,12 +6,14 @@ import telebot
 import logging
 
 
-def update_offers(bot: telebot.TeleBot, redis_instance: Redis, user_id: str, chat_id: str):
+def update_offers(bot: telebot.TeleBot, user_id: str, chat_id: str):
     logging.info('Starting of updating...')
     parsed_urls = parse_url()
-    serialized_sended_urls = redis_instance.hget(user_id, 'sended_urls')
-    if serialized_sended_urls is None:
-        raise ValueError(f'Don\'t have any sended offer for user {user_id}')
+    try:
+        with open(f'data/{user_id}', 'rb') as f:
+            serialized_sended_urls = pickle.load(f)
+    except Exception as e:
+        raise ValueError(f'Don\'t have any sended offer for user {user_id}. Have error: {e}')
     sended_urls: Set[str] = pickle.loads(serialized_sended_urls)
     url_for_sending = parsed_urls.difference(sended_urls)
 
@@ -27,4 +29,5 @@ def update_offers(bot: telebot.TeleBot, redis_instance: Redis, user_id: str, cha
     else:
         bot.send_message(chat_id, 'Didn\'t find any new offers')
 
-    redis_instance.hset(user_id, 'sended_urls', pickle.dumps(sended_urls))
+    with open(f'data/{user_id}', 'rb') as f:
+        pickle.dump(sended_urls, f)

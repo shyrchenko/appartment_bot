@@ -43,7 +43,9 @@ def send_welcome(message):
     else:
         bot.send_message(chat_id, 'Didn\'t find any new offers')
 
-    redis_instance.hset(user_id, 'sended_urls', pickle.dumps(sended_urls))
+    with open(f'data/{user_id}', 'rb') as f:
+        pickle.dump(sended_urls, f)
+
     scheduler.add_job(
         func=update_offers,
         trigger=IntervalTrigger(minutes=30),
