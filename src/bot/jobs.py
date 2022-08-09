@@ -1,5 +1,4 @@
 from parsers import parse_url
-from redis import Redis
 import pickle
 from typing import Set
 import telebot

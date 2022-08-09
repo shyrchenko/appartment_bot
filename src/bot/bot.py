@@ -53,7 +53,6 @@ def send_welcome(message):
         trigger=IntervalTrigger(minutes=30),
         kwargs={
             'bot': bot,
-            'redis_instance': redis_instance,
             'user_id': user_id,
             'chat_id': chat_id
         }
