@@ -43,7 +43,7 @@ def send_welcome(message):
     else:
         bot.send_message(chat_id, 'Didn\'t find any new offers')
 
-    with open(f'data/{user_id}', 'rb') as f:
+    with open(f'data/{user_id}', 'wb') as f:
         pickle.dump(sended_urls, f)
 
     scheduler.add_job(
