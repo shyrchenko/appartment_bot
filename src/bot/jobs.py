@@ -10,10 +10,9 @@ def update_offers(bot: telebot.TeleBot, user_id: str, chat_id: str):
     parsed_urls = parse_url()
     try:
         with open(f'data/{user_id}', 'rb') as f:
-            serialized_sended_urls = pickle.load(f)
+            sended_urls = pickle.load(f)
     except Exception as e:
         raise ValueError(f'Don\'t have any sended offer for user {user_id}. Have error: {e}')
-    sended_urls: Set[str] = pickle.loads(serialized_sended_urls)
     url_for_sending = parsed_urls.difference(sended_urls)
 
     if len(url_for_sending) > 0:
