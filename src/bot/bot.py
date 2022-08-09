@@ -4,6 +4,7 @@ import pickle
 import logging
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
+import os
 
 from parsers import parse_url
 from jobs import update_offers
@@ -43,6 +44,7 @@ def send_welcome(message):
     else:
         bot.send_message(chat_id, 'Didn\'t find any new offers')
 
+    os.makedirs('data', exist_ok=True)
     with open(f'data/{user_id}', 'wb') as f:
         pickle.dump(sended_urls, f)
 
