@@ -27,5 +27,5 @@ def update_offers(bot: telebot.TeleBot, user_id: str, chat_id: str):
     else:
         bot.send_message(chat_id, 'Didn\'t find any new offers')
 
-    with open(f'data/{user_id}', 'rb') as f:
+    with open(f'data/{user_id}', 'wb') as f:
         pickle.dump(sended_urls, f)
